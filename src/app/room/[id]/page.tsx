@@ -3,8 +3,8 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Loader2, X } from 'lucide-react';
-import { useEffect, useState, useMemo } from 'react';
+import { Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { DM_Sans, Lexend_Deca } from 'next/font/google';
 import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
@@ -21,43 +21,14 @@ const lexendDeca = Lexend_Deca({
   weight: ["400", "500", "700"],
 });
 
-// Sample wallet addresses for animation
-const sampleWallets = [
-  'EwSV5qJpKi5TVvBu3mzy7h58AVGKNXrvsE2gdmTNc1YB',
-  'HN4tgjqZLU8Tz7QRePuYGKDjKzfPkHjdmUj9AQCBLV6r',
-  '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin',
-  'J8K1yE7kZKGHvE6P2ztHJWKMJD4GH5N2drXvjwgTudha',
-  '6UbGt8YfwkAYyVHPgPyZPBJzYqLyC2J5tgYQ6MZKhVbr'
-];
+
 
 // Function to shorten wallet address
 const shortenAddress = (address: string) => {
   return `${address.slice(0, 4)}...${address.slice(-4)}`;
 };
 
-function ScrollingWallets({ onComplete }: { onComplete: () => void }) {
-  return (
-    <div className="h-24 md:h-32 overflow-hidden relative">
-      <motion.div
-        animate={{ y: [-160, -320] }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop"
-        }}
-        className="flex flex-col gap-1.5 md:gap-2"
-      >
-        {[...sampleWallets, ...sampleWallets, ...sampleWallets].map((wallet, index) => (
-          <div key={index} className="text-xs md:text-sm text-gray-500/50 whitespace-nowrap">
-            <span className="hidden md:inline">{wallet}</span>
-            <span className="inline md:hidden">{shortenAddress(wallet)}</span>
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  );
-}
+
 
 // Add this after the imports
 const pageVariants = {
@@ -91,7 +62,6 @@ export default function RoomPage() {
   const roomId = params.id;
   const { publicKey } = useWallet();
   const [foundOpponent, setFoundOpponent] = useState(false);
-  const [showScrolling, setShowScrolling] = useState(true);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [isDeposited, setIsDeposited] = useState(false);
   const [game, setGame] = useState<Chess>(new Chess());
@@ -103,21 +73,14 @@ export default function RoomPage() {
   const [promotionDialogOpen, setPromotionDialogOpen] = useState(false);
   const [promotionMove, setPromotionMove] = useState<{from: Square, to: Square} | null>(null);
   const [gameResult, setGameResult] = useState<'win' | 'lose' | 'draw' | 'resign' | 'timeout' | null>(null);
-  const [moveCount, setMoveCount] = useState(0);
   const [showResignConfirm, setShowResignConfirm] = useState(false);
   const [showGameOver, setShowGameOver] = useState(false);
   
   const opponentWallet = '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin';
 
-  function safeGameMutate(modify: (game: Chess) => void) {
-    setGame((g: Chess) => {
-      const update = new Chess(g.fen());
-      modify(update);
-      return update;
-    });
-  }
 
-  function onDrop(sourceSquare: string, targetSquare: string, piece: string): boolean {
+
+  function onDrop(sourceSquare: string, targetSquare: string): boolean {
     // Check if it's a pawn promotion move
     const gameCopy = new Chess(game.fen());
     const moves = gameCopy.moves({ verbose: true });
@@ -176,7 +139,6 @@ export default function RoomPage() {
         }));
       }
       
-      setMoveCount(prev => prev + 1);
       setIsPlayerTurn(false);
       return true;
     }
@@ -201,7 +163,6 @@ export default function RoomPage() {
       const moveText = `${promotionMove.from[0]}${promotionMove.to}=${promotionPiece.toUpperCase()}`;
       setMoves(prev => [...prev, moveText]);
       
-      setMoveCount(prev => prev + 1);
       setIsPlayerTurn(false);
     }
 
@@ -276,7 +237,6 @@ export default function RoomPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowScrolling(false);
       setFoundOpponent(true);
     }, 10000);
 
@@ -326,37 +286,7 @@ export default function RoomPage() {
     }
   };
 
-  // Add this function to get game result message
-  const getGameResultMessage = () => {
-    switch (gameResult) {
-      case 'win':
-        return 'You Won!';
-      case 'lose':
-        return 'You Lost';
-      case 'draw':
-        return 'Game Drawn';
-      case 'resign':
-        return 'Game Over  Resigned';
-      case 'timeout':
-        return 'Game Over  Time\'s Up';
-      default:
-        return '';
-    }
-  };
 
-  // Add this function to get game result color
-  const getGameResultColor = () => {
-    switch (gameResult) {
-      case 'win':
-        return 'text-green-400';
-      case 'lose':
-        return 'text-red-400';
-      case 'draw':
-        return 'text-yellow-400';
-      default:
-        return 'text-white';
-    }
-  };
 
   // If deposited, show chess board on black screen
   if (isDeposited) {

@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { DM_Sans } from 'next/font/google';
 import { X } from 'lucide-react';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const dmSans = DM_Sans({
