@@ -20,9 +20,11 @@
     "chess.js": "^1.2.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
+    "lightningcss": "^1.30.1",
     "lucide-react": "^0.487.0",
-    "next": "15.2.5",
+    "next": "^15.4.5",
     "pino-pretty": "^13.0.0",
+    "postcss": "^8.5.6",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.3.0",
     "react-chessboard": "^4.7.2",
@@ -42,7 +44,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.5",
     "tailwind-scrollbar": "^4.0.2",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5"
   }
 }
