@@ -10,6 +10,7 @@ import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import DepositModal from '@/components/DepositModal';
 import { Square } from 'chess.js';
+import Image from 'next/image'
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -391,9 +392,11 @@ export default function RoomPage() {
                       <div className="flex gap-1 min-w-min pb-2">
                         {capturedPieces.white.map((piece, index) => (
                           <div key={index} className="w-8 h-8 bg-white/5 rounded flex-shrink-0 flex items-center justify-center">
-                            <img
+                            <Image
                               src={getPieceImage(piece, 'white')}
                               alt={`White ${piece}`}
+                              width={24}
+                              height={24}
                               className="w-6 h-6 object-contain drop-shadow-md"
                             />
                           </div>
@@ -407,9 +410,11 @@ export default function RoomPage() {
                       <div className="flex gap-1 min-w-min pb-2">
                         {capturedPieces.black.map((piece, index) => (
                           <div key={index} className="w-8 h-8 bg-white/5 rounded flex-shrink-0 flex items-center justify-center">
-                            <img
+                            <Image
                               src={getPieceImage(piece, 'black')}
                               alt={`Black ${piece}`}
+                              width={24}
+                              height={24}
                               className="w-6 h-6 object-contain drop-shadow-md"
                             />
                           </div>
@@ -489,110 +494,122 @@ export default function RoomPage() {
                     animationDuration={200}
                     customPieces={{
                       wP: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('p', 'white')}
                             alt="white pawn"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bP: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('p', 'black')}
                             alt="black pawn"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       wQ: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('q', 'white')}
                             alt="white queen"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bQ: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('q', 'black')}
                             alt="black queen"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       wR: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('r', 'white')}
                             alt="white rook"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bR: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('r', 'black')}
                             alt="black rook"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       wB: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('b', 'white')}
                             alt="white bishop"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bB: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('b', 'black')}
                             alt="black bishop"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       wN: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('n', 'white')}
                             alt="white knight"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bN: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('n', 'black')}
                             alt="black knight"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       wK: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('k', 'white')}
                             alt="white king"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       ),
                       bK: ({ squareWidth }) => (
-                        <div style={{ width: squareWidth, height: squareWidth }}>
-                          <img
+                        <div style={{ width: squareWidth, height: squareWidth, position: 'relative' }}>
+                          <Image
                             src={getPieceImage('k', 'black')}
                             alt="black king"
-                            style={{ width: '100%', height: '100%' }}
+                            fill
+                            style={{ objectFit: 'contain' }}
                           />
                         </div>
                       )
@@ -640,9 +657,11 @@ export default function RoomPage() {
                         <div className="flex gap-1 min-w-min pb-2">
                           {capturedPieces.white.map((piece, index) => (
                             <div key={index} className="w-8 h-8 bg-white/5 rounded flex-shrink-0 flex items-center justify-center">
-                              <img
+                              <Image
                                 src={getPieceImage(piece, 'white')}
                                 alt={`White ${piece}`}
+                                width={24}
+                                height={24}
                                 className="w-6 h-6 object-contain drop-shadow-md"
                               />
                             </div>
@@ -656,9 +675,11 @@ export default function RoomPage() {
                         <div className="flex gap-1 min-w-min pb-2">
                           {capturedPieces.black.map((piece, index) => (
                             <div key={index} className="w-8 h-8 bg-white/5 rounded flex-shrink-0 flex items-center justify-center">
-                              <img
+                              <Image
                                 src={getPieceImage(piece, 'black')}
                                 alt={`Black ${piece}`}
+                                width={24}
+                                height={24}
                                 className="w-6 h-6 object-contain drop-shadow-md"
                               />
                             </div>
@@ -892,9 +913,11 @@ export default function RoomPage() {
                 >
                   <div className="absolute inset-0 bg-white/5 rounded-lg transform transition-transform group-hover:scale-110" />
                   <div className="relative w-20 h-20 bg-gradient-to-b from-gray-700/50 to-gray-800/50 rounded-lg border border-gray-500 hover:border-white/30 transition-all duration-200 flex items-center justify-center">
-                    <img
+                    <Image
                       src={getPieceImage(piece, isPlayerTurn ? 'white' : 'black')}
                       alt={piece.toUpperCase()}
+                      width={64}
+                      height={64}
                       className="w-16 h-16 object-contain transform transition-transform group-hover:scale-110"
                       style={{
                         filter: 'brightness(1.3) drop-shadow(0 0 8px rgba(255, 255, 255, 0.2))'
